@@ -1,6 +1,7 @@
 #include <iostream>
 #include "operations.h"
 
+
 int main()
 {
     int choice = -1;
@@ -10,7 +11,12 @@ int main()
     {
         std::cout << "Select an operation:\n0 - Exit\n1 - Plus\n2 - Minus\n3 - Multiply\n4 - Divide\n";
         std::cin >> choice;
-        if (choice == 0)
+        if (choice < 0 || choice > 4) {
+            std::cout << "Invalid choice.\n";
+            continue;
+        }
+
+        if (choice == EXIT)
         {
             break;
         }
@@ -21,18 +27,27 @@ int main()
 
         switch (choice)
         {
-        case 1:
+        case PLUS:
             plus(num1, num2);
             break;
-        case 2:
+        case MINUS:
             minus(num1, num2);
             break;
-        case 3:
+        case MULTIPLY:
             multiply(num1, num2);
             break;
-        case 4:
-            divide(num1, num2);
+        case DIVIDE:
+            if(num2 != 0)
+            {
+                divide(num1, num2);
+            }
+            else
+            {
+                std::cout << "Division by zero is not allowed" << std::endl;
+            }
             break;
+        default:
+            std::cout << "Invalid operation.\n";
         }
     }
 }
